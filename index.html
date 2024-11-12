@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script type="module" crossorigin src="./assets/index-D7BRoRDG.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BOPjk5Fw.css">
+  </head>
+  <body>
+
+    <div id="app">
+      <div class="products" id="products"></div>
+      </div>
+
+    <script>
+      async function allData(){
+        let products = ""
+        let data = await fetch("https://fakestoreapi.com/products");
+        let res = await data.json()
+        products = res.map((elem)=>{
+              return `<div class="card">
+          <span class="title">${elem.title}</span>
+          <img src="${elem.image}" alt="" />
+          <div class="description">
+          ${elem.description}}
+          </div>
+          <div class="price">${elem.price}</div>
+          <div class="category">${elem.category}</div>
+          <div class="rating">
+            <div class="rate">rate:${elem.rating.rate}</div>
+            <div class="count">count:${elem.rating.count}</div>
+            <a href="#" class="buy">buy it now</a>
+          </div>
+        </div>`
+        })
+        // console.log(products);
+        document.querySelector("#products").insertAdjacentHTML("afterbegin",products)
+      }
+      allData()
+    </script>
+  </body>
+</html>
